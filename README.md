@@ -25,5 +25,5 @@ sudo cmake --build _build --target install
 
 ## Example
 ```sh
-./AstraTesting --ping_ip="ya.ru" --ping_n=10 --ping_i=1 --iperf_t=1
+AstraTesting --ping_ip="ya.ru" --ping_n=10 --ping_i=1 --iperf_t=1
 ```
