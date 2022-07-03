@@ -5,6 +5,13 @@ cmake -H. -B_build
 ```sh
 cmake --build B_build
 ```
+## Install
+```sh
+cmake -H. -B_build
+```
+```sh
+sudo cmake --build _build --target install
+```
 ## Params
 ### Ping
 - **ping_ip** - IP (192.168.0.2 - by default)
