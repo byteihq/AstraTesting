@@ -5,8 +5,8 @@
 
 #ifdef BUFSIZ
 #undef BUFSIZ
-#define BUFSIZ 1024
 #endif
+#define BUFSIZ 1024
 
 struct PINGParams {
     int PacketSize = 1400;

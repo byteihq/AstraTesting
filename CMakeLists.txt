@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.0)
 include("cmake/HunterGate.cmake")
 
 HunterGate(
-        URL "https://github.com/cpp-pm/hunter/archive/v0.23.314.tar.gz"
-        SHA1 "95c47c92f68edb091b5d6d18924baabe02a6962a"
+    URL "https://github.com/cpp-pm/hunter/archive/v0.23.314.tar.gz"
+    SHA1 "95c47c92f68edb091b5d6d18924baabe02a6962a"
 )
 
 project(AstraTesting)
@@ -39,5 +39,5 @@ add_executable(${PROJECT_NAME} demo/main.cpp)
 
 target_link_libraries(${PROJECT_NAME} Commons Boost::program_options)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 include(CPackConfig.cmake)
