@@ -8,6 +8,10 @@
 #endif
 #define BUFSIZ 1024
 
+struct USERParams {
+    std::string UserName = "u";
+};
+
 struct PINGParams {
     int PacketSize = 1400;
     int PacketsNumber = 10;

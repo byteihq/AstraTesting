@@ -13,6 +13,8 @@ cmake -H. -B_build
 sudo cmake --build _build --target install
 ```
 ## Params
+### User
+- **user** - User name (u - by default)
 ### Ping
 - **ping_ip** - IP (192.168.0.2 - by default)
 - **ping_i** - Interval (0.1 - by default)

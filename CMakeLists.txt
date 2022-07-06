@@ -27,7 +27,6 @@ find_package(Boost CONFIG REQUIRED program_options)
 add_library(Commons STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Commons/Terminal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Commons/Logger.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Commons/Utils.cpp
         )
 
 target_include_directories(Commons PUBLIC

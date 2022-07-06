@@ -3,11 +3,11 @@
 #include "Logger.h"
 #include "Terminal.h"
 #include "Presets.h"
-#include "Utils.h"
 #include <boost/program_options.hpp>
 #include <stdarg.h>
+#include <iostream>
 
-static std::string UserName = Utils::GetUserName();
+static std::string Path = "/home/";
 
 std::string InsertParams(const char *ExecCommand, ...) {
     char res[BUFSIZ];
@@ -29,19 +29,25 @@ void Test(const std::string &TestName, const std::string &ExecCommand, const std
     if (FileName.empty()) {
         return;
     }
-    std::string Path = "/home/" + UserName + "/" + FileName;
     Logger::Log(TestName + "_OUTPUT:\n" + res.second);
-    Logger::WriteOutput(Path, res.second);
-    Logger::Log(TestName + "_FILE: " + Path);
+    Logger::WriteOutput(Path + "/" + FileName, res.second);
+    Logger::Log(TestName + "_FILE: " + Path + "/" + FileName);
 }
 
 namespace po = boost::program_options;
 
 int main(int argc, char **argv) {
+    if (getuid()) {
+        std::cout << "You should run this program as super-user";
+        return -1;
+    }
+
     po::options_description desc("Options");
     PINGParams pingParams;
     IPERFParams iperfParams;
+    USERParams userParams;
     desc.add_options()
+            ("user", po::value(&userParams.UserName), "User name")
             ("ping_ip", po::value(&pingParams.IP), "IP to ping")
             ("ping_i", po::value(&pingParams.Interval), "Ping interval")
             ("ping_s", po::value(&pingParams.PacketSize), "Ping packet's size")
@@ -52,7 +58,7 @@ int main(int argc, char **argv) {
     po::variables_map vm;
     po::store(po::command_line_parser(argc, argv).options(desc).run(), vm);
     po::notify(vm);
-
+    Path += userParams.UserName;
 //  LSHW_TEST
     Test("LSHW", LSHW_TEST, LSHW_OUT);
 
