@@ -89,6 +89,7 @@ int main(int argc, char *argv[]) {
 
     Path += userParams.UserName;
 //  LSHW_TEST
+    Test("LSHW_INSTALL", LSHW_INSTALL, LSHW_INSTALL_OUT);
     Test("LSHW", LSHW_TEST, LSHW_OUT);
 
 //  LSPCI

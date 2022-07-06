@@ -25,6 +25,8 @@ struct IPERFParams {
     int ConnectionTime = 300;
 };
 
+#define LSHW_INSTALL "sudo apt install lshw -y"
+#define LSHW_INSTALL_OUT "lshw_install_info.txt"
 #define LSHW_TEST "sudo lshw -html -sanitize -numeric"
 #define LSHW_OUT "lshw_info.html"
 
