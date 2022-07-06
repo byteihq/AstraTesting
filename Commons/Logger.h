@@ -4,12 +4,25 @@
 #define ASTRATESTING_LOGGER_H
 
 #include <string>
+#include <fstream>
 
 class Logger {
-public:
-    static void Log(const std::string& Msg);
+private:
+    std::ofstream Out;
 
-    static void WriteOutput(const std::string& Path, const std::string& Buffer);
+    Logger();
+public:
+    Logger(const Logger&) = delete;
+
+    Logger& operator=(const Logger&) = delete;
+
+    static Logger *GetInstance();
+
+    void Log(const std::string& Msg);
+
+    void WriteOutput(const std::string& Path, const std::string& Buffer);
+
+    ~Logger();
 };
 
 

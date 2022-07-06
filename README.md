@@ -5,6 +5,10 @@ cmake -H. -B_build
 ```sh
 cmake --build B_build
 ```
+**OR**
+```sh
+./build.sh
+```
 ## Install
 ```sh
 cmake -H. -B_build
@@ -27,5 +31,5 @@ sudo cmake --build _build --target install
 
 ## Example
 ```sh
-AstraTesting --ping_ip="ya.ru" --ping_n=10 --ping_i=1 --iperf_t=1
+sudo ./AstraTesting --ping_ip="ya.ru" --ping_n=10 --ping_i=1 --iperf_t=1
 ```
