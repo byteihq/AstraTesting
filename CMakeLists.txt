@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_library(Commons STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Commons/Terminal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Commons/Logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Commons/Config.cpp
         )
 
 target_include_directories(Commons PUBLIC
@@ -21,9 +22,24 @@ target_include_directories(Commons PUBLIC
         $<INSTALL_INTERFACE:include>
         )
 
-add_executable(${PROJECT_NAME} demo/main.cpp)
+add_subdirectory(${PROJECT_SOURCE_DIR}/third-party/json)
+target_link_libraries(Commons nlohmann_json)
 
-target_link_libraries(${PROJECT_NAME} Commons)
+
+add_library(Tests STATIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/Tests/BaseTest.cpp
+        )
+
+target_include_directories(Tests PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Tests/>
+        $<INSTALL_INTERFACE:include>
+        )
+target_link_libraries(Tests Commons)
+
+add_executable(${PROJECT_NAME} demo/main.cpp)
+target_link_libraries(${PROJECT_NAME} Commons Tests)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 include(CPackConfig.cmake)
+
+file(COPY ${PROJECT_SOURCE_DIR}/misc/config.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

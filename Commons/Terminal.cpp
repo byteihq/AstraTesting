@@ -1,7 +1,6 @@
 // Copyright 2022 byteihq
 
 #include "Terminal.h"
-#include "Presets.h"
 
 std::pair<bool, std::string> Terminal::Exec(const std::string &cmd) {
     int iErrorLevel = 0;

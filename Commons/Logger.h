@@ -6,11 +6,21 @@
 #include <string>
 #include <fstream>
 
+class Config;
+
 class Logger {
 private:
+    friend class Config;
     std::ofstream Out;
-
     Logger();
+
+private:
+    struct Params {
+        bool LogToConsole = false;
+        bool LogToFile = false;
+    } currentParams;
+
+
 public:
     Logger(const Logger&) = delete;
 
@@ -18,9 +28,15 @@ public:
 
     static Logger *GetInstance();
 
-    void Log(const std::string& Msg);
+    void Log(const std::string& Msg, bool SkipParams = false);
 
-    void WriteOutput(const std::string& Path, const std::string& Buffer);
+    void WriteOutput(const std::string& Path, const std::string& Buffer, bool OverWrite);
+
+    void SetLogToConsole(bool LogToConsole);
+
+    void SetLogToFile(bool LogToFile);
+
+    void ClearLog();
 
     ~Logger();
 };
