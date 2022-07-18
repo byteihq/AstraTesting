@@ -42,7 +42,7 @@
       "InstallExecute": "apt-get install iputils-ping -y",
       "InstallOut": "ping_install.txt",
       "Test": true,
-      "TestExecute": "ping -c 1400 -s 10 -i 0.1 192.168.0.2",
+      "TestExecute": "ping -c 10 -s 1400 -i 0.1 192.168.0.2",
       "TestOut": "ping_info.txt"
     },
     "IPERF_TEST" :

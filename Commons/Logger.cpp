@@ -27,6 +27,9 @@ void Logger::Log(const std::string &Msg, bool SkipParams) {
 }
 
 void Logger::WriteOutput(const std::string &Path, const std::string &Buffer, bool OverWrite) {
+    if (!currentParams.LogToFile) {
+        return;
+    }
     std::ofstream out;
     if (OverWrite) {
         out.open(Path, std::ios::trunc);
