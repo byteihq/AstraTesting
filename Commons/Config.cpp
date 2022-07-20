@@ -58,10 +58,10 @@ void Config::UnParsePresets() {
         Logger::GetInstance()->Log(std::string("Failed to unparse presets settings, error:\n") + std::string(e.what()), true);
     }
     ss << "Presets ready:"
-       << "\nOutputPath: " << presets.OutputPath
-       << "\nRewriteExistFiles: " << std::boolalpha << presets.RewriteExistFiles
-       << "\nLogToConsole: " << std::boolalpha << presets.LogToConsole
-       << "\nLogToFile: " << std::boolalpha << presets.LogToFile
-       << "\nRequiresRoot: " << std::boolalpha << presets.RequiresRoot;
+       << "\n\tOutputPath: " << presets.OutputPath
+       << "\n\tRewriteExistFiles: " << std::boolalpha << presets.RewriteExistFiles
+       << "\n\tLogToConsole: " << std::boolalpha << presets.LogToConsole
+       << "\n\tLogToFile: " << std::boolalpha << presets.LogToFile
+       << "\n\tRequiresRoot: " << std::boolalpha << presets.RequiresRoot;
     Logger::GetInstance()->Log(ss.str(), true);
 }

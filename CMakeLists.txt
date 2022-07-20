@@ -23,18 +23,22 @@ target_include_directories(Commons PUBLIC
         )
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/third-party/json)
-target_link_libraries(Commons nlohmann_json)
+target_link_libraries(Commons nlohmann_json -lusb)
 
 
 add_library(Tests STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Tests/BaseTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Tests/InternetTest.cpp
         )
 
 target_include_directories(Tests PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Tests/>
         $<INSTALL_INTERFACE:include>
         )
-target_link_libraries(Tests Commons)
+
+find_package(CURL REQUIRED)
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(Tests Commons -lcurl)
 
 add_executable(${PROJECT_NAME} demo/main.cpp)
 target_link_libraries(${PROJECT_NAME} Commons Tests)

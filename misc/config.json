@@ -9,113 +9,143 @@
   },
   "Tests":
   {
-    "ASTRA_UPDATE" :
-    {
-      "Install": false,
-      "InstallExecute": "",
-      "InstallOut": "",
-      "Test": true,
-      "TestExecute": "apt-get update && apt-get dist-upgrade && apt-get install linux-4.15 -y && apt-get install linux-5.4 -y && apt-get install linux-5.10 -y",
-      "TestOut": "update_info.html"
-    },
     "LSHW_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install lshw -y",
       "InstallOut": "lhsw_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "lshw -html -sanitize -numeric",
-      "TestOut": "lshw_info.html"
+      "TestOut": "lshw_info.html",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove lshw -y"
     },
     "LSPCI_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install pciutils -y",
       "InstallOut": "lspci_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "lspci -k | grep -i -EA2 net",
-      "TestOut": "lspci_info.txt"
+      "TestOut": "lspci_info.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove pciutils -y"
     },
     "PING_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install iputils-ping -y",
       "InstallOut": "ping_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "ping -c 10 -s 1400 -i 0.1 192.168.0.2",
-      "TestOut": "ping_info.txt"
+      "TestOut": "ping_info.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove iputils-ping -y"
     },
     "IPERF_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install iperf -y",
       "InstallOut": "iperf_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "script -c 'iperf -c 192.168.0.2 -P 50 -r -t 300'",
-      "TestOut": "ip_info.txt"
+      "TestOut": "ip_info.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove iperf -y"
     },
     "AUDIO_TEST" :
     {
-      "Install": true,
-      "InstallExecute": "apt-get install alsa-utils - y",
+      "InstallEnabled": true,
+      "InstallExecute": "apt-get install alsa-utils -y",
       "InstallOut": "audio_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "aplay -l && audacity",
-      "TestOut": "audio_info.txt"
+      "TestOut": "audio_info.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove alsa-utils -y"
     },
     "LSPCI_VIDEO_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install pciutils -y",
       "InstallOut": "lspci_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "lspci -v | grep -i VGA && lspci -k | grep -EA2 'VGA|3D' && lshw -c video | grep driver",
-      "TestOut": "vga_adapter.txt"
+      "TestOut": "vga_adapter.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove pciutils -y"
     },
     "CPU_INFO_TEST" :
     {
-      "Install": false,
+      "InstallEnabled": false,
       "InstallExecute": "",
       "InstallOut": "",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "cat /proc/cpuinfo",
-      "TestOut": "base_cpu.txt"
+      "TestOut": "base_cpu.txt",
+      "RemoveAfterEnabled": false,
+      "RemoveAfterExecute": ""
     },
     "LSCPU_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install util-linux -y",
       "InstallOut": "lscpu_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "lscpu",
-      "TestOut": "info_lscpu.txt"
+      "TestOut": "info_lscpu.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove util-linux -y"
     },
     "CPU_FREQ_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install cpufrequtils -y",
       "InstallOut": "cpu_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "сpufreq-info",
-      "TestOut": "cpu_freq.txt"
+      "TestOut": "cpu_freq.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove cpufrequtils -y"
     },
     "LM_SENSORS_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install lm-sensors -y",
       "InstallOut": "lm_sensors_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "sensors",
-      "TestOut": "sensors_info.txt"
+      "TestOut": "sensors_info.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove lm-sensors -y"
     },
     "VIDEO_STRESS_TEST" :
     {
-      "Install": true,
+      "InstallEnabled": true,
       "InstallExecute": "apt-get install mesa-utils -y",
       "InstallOut": "mesa_utils_install.txt",
-      "Test": true,
+      "TestEnabled": true,
       "TestExecute": "glxgears -info && glxinfo | grep -i renderer && glxinfo -B",
-      "TestOut": "glxinfo.txt"
+      "TestOut": "glxinfo.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove mesa-utils -y"
+    },
+    "USB_TEST" :
+    {
+      "InstallEnabled": true,
+      "InstallExecute": "apt-get install usbutils -y",
+      "InstallOut": "usb_install.txt",
+      "TestEnabled": true,
+      "TestExecute": "lsusb -v",
+      "TestOut": "usb_info.txt",
+      "RemoveAfterEnabled": true,
+      "RemoveAfterExecute": "apt-get remove usbutils -y"
+    },
+    "INTERNET_TEST" :
+    {
+      "TestEnabled": true,
+      "Urls": ["www.google.com", "https://ya.ru", "https://www.aq.ru/"],
+      "TestOut": "internet_speed.txt"
     }
   }
 }

@@ -3,8 +3,10 @@
 #include "Logger.h"
 #include "Config.h"
 #include "BaseTest.h"
+#include "InternetTest.h"
 #include <unistd.h>
 #include <vector>
+#include <memory>
 #include <iostream>
 
 int main(int argc, char *argv[]) {
@@ -17,10 +19,15 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    std::vector<BaseTest> BaseTests;
     auto &Tests = Config::GetInstance()->GetConfig()["Tests"];
+    std::vector<std::unique_ptr<BaseTest>> BaseTests;
     for (auto test = Tests.begin(); test != Tests.end(); ++test) {
-        BaseTests.emplace_back(test.key(), *test);
+        if (test.key() == "INTERNET_TEST") {
+            BaseTests.emplace_back(new InternetTest);
+        } else {
+            BaseTests.emplace_back(new BaseTest);
+        }
+        BaseTests.back()->Init(test.key(), *test);
     }
 
     Logger::GetInstance()->Log("Do you want to continue with these params? [y/n]", true);
@@ -36,8 +43,8 @@ int main(int argc, char *argv[]) {
         Logger::GetInstance()->ClearLog();
     }
 
-    for (const auto& test : BaseTests) {
-        test.Run();
+    for (const auto &test: BaseTests) {
+        test->Run();
     }
     return 0;
 }
