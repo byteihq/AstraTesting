@@ -28,11 +28,11 @@ void InternetTest::Init(const std::string &TestName, const nlohmann::json &confi
     }
     ss << TestName << " ready:"
        << "\n\tTestEnabled: " << std::boolalpha << currentParams.TestEnabled
-       << "\n\tUrls: ";
+       << "\n\tUrls: [";
     for (const auto &Url: currentParams.Urls) {
-        ss << Url << " ";
+        ss << "\n\t\t" << Url;
     }
-    ss << "\n\tTestOut: " << currentParams.TestOut;
+    ss << "\n\t]\n\tTestOut: " << currentParams.TestOut;
     Logger::GetInstance()->Log(ss.str(), true);
 }
 
@@ -84,7 +84,9 @@ void InternetTest::Run() const {
         output += Url + " speed: " + std::to_string(speed) + " MBs\n";
         ++sUrls;
     }
-    avgSpeed /= sUrls;
+    if (sUrls != 0) {
+        avgSpeed /= sUrls;
+    }
     output += "Avg speed: " + std::to_string(avgSpeed) + " MBs";
     Logger::GetInstance()->Log(output);
     Logger::GetInstance()->WriteOutput(Config::GetInstance()->GetPresets().OutputPath + "/" + currentParams.TestOut,
